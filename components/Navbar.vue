@@ -78,18 +78,11 @@
     </nav>
 
     <!-- Modal -->
-    <div
-      class="modal fade"
-      id="registerModal"
-      tabindex="-1"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog">
         <form class="modal-content" @submit.prevent="register">
           <div class="modal-header">
-            <h1 class="modal-title fs-5">
-              Register here
-            </h1>
+            <h1 class="modal-title fs-5">Register here</h1>
             <button
               type="button"
               class="btn-close"
@@ -144,7 +137,11 @@
             >
               Register
             </button>
-            <div class="spinner-border spinner-border-sm" role="status" v-if="loading === true">
+            <div
+              class="spinner-border spinner-border-sm"
+              role="status"
+              v-if="loading === true"
+            >
               <span class="visually-hidden">Loading...</span>
             </div>
           </div>
@@ -168,9 +165,13 @@ export default {
   },
   methods: {
     async register() {
-      this.loading = true;
-      const response = await this.$axios.$post("/auth/register", this.user);
-      console.log(data);
+      try {
+        this.loading = true;
+        const response = await this.$axios.$post("/auth/register", this.user);
+        this.$store.dispatch("validationSuccess/setSuccess", "User registered successfully");
+      } catch (error) {
+        console.log(error);
+      }
       this.loading = false;
     },
   },
