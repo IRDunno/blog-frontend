@@ -54,7 +54,7 @@
               >
             </li>
           </ul>
-          <ul class="navbar-nav ml-auto gap-2">
+          <ul class="navbar-nav ml-auto gap-2" v-if="authenticated === false">
             <li class="nav-item">
               <nuxt-link
                 class="nav-link text-primary"

@@ -12,7 +12,7 @@
             class="form-control"
             id="emailInput"
             placeholder="name@example.com"
-            v-model="user.email"
+            v-model="form.email"
           />
           <small
             class="form-text text-danger"
@@ -29,7 +29,7 @@
             class="form-control"
             id="passwordInput"
             placeholder="Enter your password"
-            v-model="user.password"
+            v-model="form.password"
           />
           <small
             class="form-text text-danger"
@@ -64,7 +64,7 @@
 export default {
   data() {
     return {
-      user: {
+      form: {
         email: "",
         password: "",
       },
@@ -76,11 +76,11 @@ export default {
       try {
         this.loading = true;
         await this.$auth.loginWith("local", {
-          data: this.user,
+          data: this.form,
         });
 
         this.$router.push("/");
-        // this.$store.dispatch("validationSuccess/setSuccess", "User registered successfully");
+        // this.$store.dispatch("validationSuccess/setSuccess", "Form registered successfully");
       } catch (error) {
         console.log(error);
       }

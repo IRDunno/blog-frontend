@@ -39,6 +39,7 @@ export default {
   plugins: [
     "./plugins/mixins/validationSuccess.js",
     "./plugins/mixins/validationError.js",
+    "./plugins/mixins/user.js",
     "./plugins/axios.js",
   ],
 
