@@ -54,6 +54,7 @@
               >
             </li>
           </ul>
+          <!-- Not Authenticated -->
           <ul class="navbar-nav ml-auto gap-2" v-if="authenticated === false">
             <li class="nav-item">
               <nuxt-link
@@ -75,8 +76,40 @@
               </nuxt-link>
             </li>
           </ul>
+          <!-- Authenticated -->
+          <ul class="navbar-nav ml-auto gap-2" v-if="authenticated === true">
+            <li class="nav-item dropstart">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="profileDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Profile
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#" @click="logout">Logout</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    async logout () {
+      this.$auth.logout()
+    }
+  }
+}
+</script>
