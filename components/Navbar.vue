@@ -56,21 +56,23 @@
           </ul>
           <ul class="navbar-nav ml-auto gap-2">
             <li class="nav-item">
-              <nuxt-link class="btn btn-outline-primary" to="/login"
-                >Login</nuxt-link
+              <nuxt-link
+                class="nav-link text-primary"
+                to="/login"
               >
+                Login
+              </nuxt-link>
             </li>
             <li class="nav-item d-flex align-items-center">
               <span>or</span>
             </li>
             <li class="nav-item">
-              <button
-                class="btn btn-outline-success"
-                data-bs-toggle="modal"
-                data-bs-target="#registerModal"
+              <nuxt-link
+                class="nav-link text-success"
+                to="/register"
               >
                 Register
-              </button>
+              </nuxt-link>
             </li>
           </ul>
         </div>
@@ -78,7 +80,7 @@
     </nav>
 
     <!-- Modal -->
-    <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+    <!-- <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog">
         <form class="modal-content" @submit.prevent="register">
           <div class="modal-header">
@@ -147,7 +149,7 @@
           </div>
         </form>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -168,7 +170,11 @@ export default {
       try {
         this.loading = true;
         const response = await this.$axios.$post("/auth/register", this.user);
-        this.$store.dispatch("validationSuccess/setSuccess", "User registered successfully");
+        // this.$store.dispatch("validationSuccess/setSuccess", "User registered successfully");
+        alert("User registered successfully");
+        this.user.name = "";
+        this.user.email = "";
+        this.user.password = "";
       } catch (error) {
         console.log(error);
       }
