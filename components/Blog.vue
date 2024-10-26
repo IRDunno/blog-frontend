@@ -2,8 +2,11 @@
   <div>
     <div class="card rounded mb-3">
       <div class="card-body">
-        <div class="blog-title">
+        <div class="blog-title d-flex justify-content-between align-items-center">
           <h2 class="fw-bold">{{ blog.title }}</h2>
+          <div class="edit-link">
+            <nuxt-link :to="`/blogs/edit/${blog.id}`" v-if="authenticated && blog.user.id === user.id">Edit</nuxt-link>
+          </div>
         </div>
         <hr />
         <div class="blog-context">
@@ -11,12 +14,7 @@
         </div>
         <div class="blog-footer d-flex justify-content-between">
           <div class="author">
-            <img
-              src="../static/profile/default.jpg"
-              height="40px"
-              class="rounded-circle me-1"
-              alt="Profile Picture"
-            />
+            <img src="../static/profile/default.jpg" height="40px" class="rounded-circle me-1" alt="Profile Picture" />
             <span>by {{ blog.user.name }} at {{ blog.created_at }}</span>
           </div>
           <div class="ms-auto d-flex align-items-center gap-1 pointer">
