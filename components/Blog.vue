@@ -17,7 +17,14 @@
                   >Edit</nuxt-link
                 >
               </li>
-              <li><a @click="deleteBlog(blog.id)" class="dropdown-item text-warning" href="#">Delete</a></li>
+              <li>
+                <a
+                  @click="deleteBlog(blog.id)"
+                  class="dropdown-item text-warning"
+                  href="#"
+                  >Delete</a
+                >
+              </li>
             </ul>
           </div>
         </div>
@@ -35,10 +42,18 @@
             />
             <span>by {{ blog.user.name }} at {{ blog.created_at }}</span>
           </div>
-          <div class="ms-auto d-flex align-items-center gap-1 pointer">
-            <!-- <i class="fa-regular fa-heart"></i> -->
-            <i class="fa-solid fa-heart"></i>
-            <span>1</span>
+          <div class="ms-auto d-flex align-items-center gap-1">
+            <i
+              @click="like(blog.id)"
+              class="fa-regular fa-heart pointer"
+              v-if="!blog.liked_by_users.some((liker) => liker.id === user.id)"
+            ></i>
+            <i
+              @click="unlike(blog.id)"
+              class="fa-solid fa-heart pointer"
+              v-if="blog.liked_by_users.some((liker) => liker.id === user.id)"
+            ></i>
+            <span>{{ blog.like_count }}</span>
           </div>
         </div>
       </div>
@@ -58,9 +73,19 @@ export default {
     async deleteBlog(id) {
       await this.$axios.$delete(`/blogs/${id}`);
       alert("Blog deleted");
-      this.$emit("deleted", id); // Emit event with blog ID
-    }
-  }
+      this.$emit("deleted", id);
+    },
+    async like(id) {
+      const response = await this.$axios.$post(`/blogs/${id}/like`);
+      this.blog.liked_by_users = response.data.liked_by_users;
+      this.blog.like_count = response.data.like_count;
+    },
+    async unlike(id) {
+      const response = await this.$axios.$delete(`/blogs/${id}/unlike`);
+      this.blog.liked_by_users = response.data.liked_by_users;
+      this.blog.like_count = response.data.like_count;
+    },
+  },
 };
 </script>
 
