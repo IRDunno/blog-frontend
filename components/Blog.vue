@@ -2,10 +2,25 @@
   <div>
     <div class="card rounded mb-3">
       <div class="card-body">
-        <div class="blog-title d-flex justify-content-between align-items-center">
+        <div
+          class="blog-title d-flex justify-content-between align-items-center"
+        >
           <h2 class="fw-bold">{{ blog.title }}</h2>
-          <div class="edit-link">
-            <nuxt-link :to="`/blogs/edit/${blog.id}`" v-if="authenticated && blog.user.id === user.id">Edit</nuxt-link>
+          <div class="dropdown">
+            <i
+              class="fa-solid fa-ellipsis"
+              data-bs-toggle="dropdown"
+            ></i>
+            <ul class="dropdown-menu">
+              <li>
+                <nuxt-link
+                  class="dropdown-item"
+                  :to="`/blogs/edit/${blog.id}`"
+                  v-if="authenticated && blog.user.id === user.id"
+                  >Edit</nuxt-link
+                >
+              </li>
+            </ul>
           </div>
         </div>
         <hr />
@@ -14,7 +29,12 @@
         </div>
         <div class="blog-footer d-flex justify-content-between">
           <div class="author">
-            <img src="../static/profile/default.jpg" height="40px" class="rounded-circle me-1" alt="Profile Picture" />
+            <img
+              src="../static/profile/default.jpg"
+              height="40px"
+              class="rounded-circle me-1"
+              alt="Profile Picture"
+            />
             <span>by {{ blog.user.name }} at {{ blog.created_at }}</span>
           </div>
           <div class="ms-auto d-flex align-items-center gap-1 pointer">
@@ -33,14 +53,18 @@ export default {
   props: {
     blog: {
       type: Object,
-      required: true
-    }
-  }
-}
+      required: true,
+    },
+  },
+};
 </script>
 
 <style>
 .pointer {
+  cursor: pointer;
+}
+
+.fa-ellipsis {
   cursor: pointer;
 }
 </style>
