@@ -7,19 +7,17 @@
         >
           <h2 class="fw-bold">{{ blog.title }}</h2>
           <div class="dropdown">
-            <i
-              class="fa-solid fa-ellipsis"
-              data-bs-toggle="dropdown"
-            ></i>
+            <i class="fa-solid fa-ellipsis" data-bs-toggle="dropdown"></i>
             <ul class="dropdown-menu">
               <li>
                 <nuxt-link
-                  class="dropdown-item"
+                  class="dropdown-item text-primary"
                   :to="`/blogs/edit/${blog.id}`"
                   v-if="authenticated && blog.user.id === user.id"
                   >Edit</nuxt-link
                 >
               </li>
+              <li><a @click="deleteBlog(blog.id)" class="dropdown-item text-warning" href="#">Delete</a></li>
             </ul>
           </div>
         </div>
@@ -56,6 +54,13 @@ export default {
       required: true,
     },
   },
+  methods: {
+    async deleteBlog(id) {
+      await this.$axios.$delete(`/blogs/${id}`);
+      alert("Blog deleted");
+      this.$emit("deleted", id); // Emit event with blog ID
+    }
+  }
 };
 </script>
 
