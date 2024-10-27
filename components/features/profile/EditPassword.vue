@@ -7,6 +7,13 @@
         class="form-control form-control-sm"
         v-model="password"
       />
+      <small
+        class="form-text text-danger"
+        v-if="errors.password"
+        v-for="error in errors.password"
+      >
+        {{ error }}
+      </small>
     </div>
     <hr />
     <div class="update-buttons d-flex gap-1">

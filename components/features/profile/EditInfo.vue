@@ -8,6 +8,13 @@
           class="form-control form-control-sm"
           v-model="form.name"
         />
+        <small
+          class="form-text text-danger"
+          v-if="errors.name"
+          v-for="error in errors.name"
+        >
+          {{ error }}
+        </small>
       </div>
       <div class="mb-3">
         <label for="email">Email</label>
@@ -16,6 +23,13 @@
           class="form-control form-control-sm"
           v-model="form.email"
         />
+        <small
+          class="form-text text-danger"
+          v-if="errors.email"
+          v-for="error in errors.email"
+        >
+          {{ error }}
+        </small>
       </div>
     </div>
     <hr />
