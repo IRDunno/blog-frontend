@@ -4,7 +4,7 @@
       <div class="col-lg-4">
         <div class="text-center">
           <img
-            :src="user.image"
+            :src="previewImage"
             :alt="user.name"
             class="rounded-circle mb-2"
             height="100px"
@@ -77,6 +77,7 @@ export default {
         name: "",
         email: "",
       },
+      previewImage: null,
     };
   },
   methods: {
@@ -85,7 +86,7 @@ export default {
     },
     imageUpload(event) {
       this.form.image = event.target.files[0];
-      console.log(this.form.image);
+      this.previewImage = URL.createObjectURL(this.form.image);
     },
     async updateInfo() {
       try {
@@ -114,6 +115,7 @@ export default {
   mounted() {
     this.form.name = this.user.name;
     this.form.email = this.user.email;
+    this.previewImage = this.user.image;
   },
 };
 </script>
