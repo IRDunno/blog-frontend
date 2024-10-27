@@ -42,8 +42,15 @@
               {{ error }}
             </small>
           </div>
-          <div class="button">
-            <button type="submit" class="btn btn-success" v-if="!loading">
+          <div class="button d-flex gap-2">
+            <button @click="goBack" type="button" class="btn btn-outline-warning">
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="btn btn-outline-success"
+              v-if="!loading"
+            >
               Update
             </button>
             <div class="spinner-border spinner-border-sm" role="status" v-else>
@@ -81,10 +88,13 @@ export default {
           content: this.form.content,
         });
         alert("Blog has been updated");
-        this.$router.push("/");
+        this.$router.go(-1);
       } catch (error) {
         console.log(error);
       }
+    },
+    goBack() {
+      this.$router.go(-1);
     },
   },
 };
