@@ -34,7 +34,7 @@
         <div class="blog-footer d-flex justify-content-between">
           <div class="author">
             <img
-              :src="blog.user.image"
+              :src="user.image"
               height="40px"
               class="rounded-circle me-1"
               alt="Profile Picture"
