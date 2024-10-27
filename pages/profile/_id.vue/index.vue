@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Profile />
+    <Profile :blogs="blogs" />
   </div>
 </template>
 
@@ -10,6 +10,15 @@ export default {
   middleware: ["auth"],
   components: {
     Profile,
+  },
+  data() {
+    return {
+      blogs: [],
+    };
+  },
+  async asyncData({ $axios, $auth }) {
+    const response = await $axios.$get(`/blogs/user/${$auth.user.id}`);
+    return { blogs: response.data };
   },
 };
 </script>

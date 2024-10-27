@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row gx-4 gy-4">
-      <div class="col-lg-6">
+      <div class="col-xl-6">
         <div class="card">
           <div class="card-header">Profile</div>
           <div class="card-body">
@@ -18,10 +18,11 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
-        <div class="card">
-          <div class="card-header">Blogs</div>
-          <div class="card-body">Body</div>
+      <div class="col-xl-6">
+        <p class="text-center">Own Blogs</p>
+        <hr />
+        <div v-for="(blog, index) in blogs">
+          <Blog :blog="blog" />
         </div>
       </div>
     </div>
@@ -32,12 +33,20 @@
 import EditPassword from "./EditPassword.vue";
 import UserInfo from "./UserInfo.vue";
 import EditInfo from "./EditInfo.vue";
+import Blog from "./Blog.vue";
 
 export default {
   components: {
     UserInfo,
     EditPassword,
     EditInfo,
+    Blog,
+  },
+  props: {
+    blogs: {
+      type: Array,
+      required: true
+    }
   },
   data() {
     return {
