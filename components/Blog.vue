@@ -6,14 +6,16 @@
           class="blog-title d-flex justify-content-between align-items-center"
         >
           <h2 class="fw-bold">{{ blog.title }}</h2>
-          <div class="dropdown">
+          <div
+            class="dropdown"
+            v-if="authenticated && blog.user.id === user.id"
+          >
             <i class="fa-solid fa-ellipsis" data-bs-toggle="dropdown"></i>
             <ul class="dropdown-menu">
               <li>
                 <nuxt-link
                   class="dropdown-item text-primary"
                   :to="`/blogs/edit/${blog.id}`"
-                  v-if="authenticated && blog.user.id === user.id"
                   >Edit</nuxt-link
                 >
               </li>
@@ -43,16 +45,28 @@
             <span>by {{ blog.user.name }} at {{ blog.created_at }}</span>
           </div>
           <div class="ms-auto d-flex align-items-center gap-1">
+            <!-- authenticated start -->
             <i
               @click="like(blog.id)"
               class="fa-regular fa-heart pointer"
-              v-if="!blog.liked_by_users.some((liker) => liker.id === user.id)"
+              v-if="authenticated && !blog.liked_by_users.some((liker) => liker.id === user?.id)"
             ></i>
             <i
               @click="unlike(blog.id)"
               class="fa-solid fa-heart pointer"
-              v-if="blog.liked_by_users.some((liker) => liker.id === user.id)"
+              v-if="authenticated && blog.liked_by_users.some((liker) => liker.id === user?.id)"
             ></i>
+            <!-- authenticated end -->
+            <!-- guest start -->
+            <i
+              class="fa-regular fa-heart"
+              v-if="!authenticated && blog.like_count === 0"
+            ></i>
+            <i
+              class="fa-solid fa-heart"
+              v-if="!authenticated && blog.like_count > 0"
+            ></i>
+            <!-- guest end -->
             <span>{{ blog.like_count }}</span>
           </div>
         </div>
