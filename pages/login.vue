@@ -38,6 +38,13 @@
           >
             {{ error }}
           </small>
+          <small
+            class="form-text text-danger"
+            v-if="errors.invalid"
+            v-for="error in errors.invalid"
+          >
+            {{ error }}
+          </small>
         </div>
         <div class="button">
           <button
