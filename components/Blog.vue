@@ -42,7 +42,7 @@
               class="rounded-circle me-1"
               alt="Profile Picture"
             />
-            <span>by {{ blog.user.name }} at {{ blog.created_at }}</span>
+            <span>by {{ blog.user.name }} at {{ blog.created_at }} <span v-if="blog.created_at != blog.updated_at">, updated {{ blog.updated_at }}</span></span>
           </div>
           <div class="ms-auto d-flex align-items-center gap-1">
             <!-- authenticated start -->
