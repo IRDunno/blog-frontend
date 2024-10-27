@@ -22,6 +22,7 @@
         >
           {{ error }}
         </small>
+        <div class="d-block d-lg-none mb-3"></div>
       </div>
       <div class="col-lg-8">
         <div class="mb-3">
