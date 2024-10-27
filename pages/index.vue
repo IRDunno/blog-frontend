@@ -10,7 +10,12 @@
 </template>
 
 <script>
+import Blog from '~/components/features/blogs/Blog.vue';
+
 export default {
+  components: {
+    Blog,
+  },
   data() {
     return {
       blogs: [],

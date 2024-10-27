@@ -1,15 +1,17 @@
 <template>
   <div class="container">
-    <h1>This is the profile page</h1>
+    <Profile />
   </div>
 </template>
 
 <script>
-  export default {
-    
-  }
+import Profile from "~/components/features/profile/Profile.vue";
+export default {
+  middleware: ["auth"],
+  components: {
+    Profile,
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
