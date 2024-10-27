@@ -84,10 +84,10 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Profile
+                {{ user.name }}
               </a>
               <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><nuxt-link class="dropdown-item" :to="`/profile/${user.id}`">Profile</nuxt-link></li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
                   <a class="dropdown-item" href="#" @click="logout">Logout</a>
