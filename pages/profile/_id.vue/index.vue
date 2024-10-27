@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Profile :blogs="blogs" />
+    <Profile :blogs="blogs" @deleted="deleted" />
   </div>
 </template>
 
@@ -20,6 +20,11 @@ export default {
     const response = await $axios.$get(`/blogs/user/${$auth.user.id}`);
     return { blogs: response.data };
   },
+  methods: {
+    deleted(id) {
+      this.blogs = this.blogs.filter(blog => blog.id != id);
+    }
+  }
 };
 </script>
 

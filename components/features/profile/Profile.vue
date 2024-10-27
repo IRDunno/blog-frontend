@@ -22,7 +22,7 @@
         <p class="text-center">Own Blogs</p>
         <hr />
         <div v-for="(blog, index) in blogs">
-          <Blog :blog="blog" />
+          <Blog :blog="blog" @deleted="deleted" />
         </div>
       </div>
     </div>
@@ -69,6 +69,9 @@ export default {
       this.editPasswordComponent = false;
       this.editInfoComponent = false;
     },
+    deleted(id) {
+      this.$emit("deleted", id);
+    }
   },
 };
 </script>
