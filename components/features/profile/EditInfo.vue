@@ -8,6 +8,7 @@
             :alt="user.name"
             class="rounded-circle mb-2"
             height="100px"
+            width="100px"
           />
         </div>
         <input
