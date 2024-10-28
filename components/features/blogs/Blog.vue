@@ -39,6 +39,7 @@
             <img
               :src="blog.user.image"
               height="40px"
+              width="40px" 
               class="rounded-circle me-1"
               alt="Profile Picture"
             />

@@ -2,7 +2,7 @@
   <div>
     <div class="row gy-3">
       <div class="col-lg-4 text-center">
-        <img :src="user.image" class="rounded-circle" height="100px" alt="">
+        <img :src="user.image" class="rounded-circle" height="100px" width="100px" alt="">
         <hr class="d-md-block d-lg-none">
       </div>
       <div class="col-lg-8">
