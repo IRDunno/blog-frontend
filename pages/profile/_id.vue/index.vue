@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Profile :blogs="blogs" @deleted="deleted" />
+    <Profile :blogs="blogs" :metaLinks="metaLinks" @deleted="deleted" />
   </div>
 </template>
 
@@ -14,11 +14,13 @@ export default {
   data() {
     return {
       blogs: [],
+      metaLinks: {},
     };
   },
   async asyncData({ $axios, $auth }) {
     const response = await $axios.$get(`/blogs/user/${$auth.user.id}`);
-    return { blogs: response.data };
+    console.log(response);
+    return { blogs: response.data, metaLinks: response.meta };
   },
   methods: {
     deleted(id) {

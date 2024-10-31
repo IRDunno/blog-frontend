@@ -84,9 +84,11 @@ export default {
         this.meta = response.meta;
 
         if ((this.meta.last_page - this.meta.current_page) > 1 && this.meta.current_page >= 3) {
-          console.log(this.meta.last_page - this.meta.current_page)
           const setSlice = this.meta.current_page - 2;
+          console.log(setSlice)
           this.paginationSlice = setSlice;
+        } else {
+          if (this.paginationSlice === 2) this.paginationSlice++;
         }
       }
     },

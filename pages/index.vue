@@ -27,7 +27,6 @@ export default {
   },
   async asyncData({ $axios }) {
     const response = await $axios.$get("/blogs");
-    console.log(response)
     return { blogs: response.data, metaLinks: response.meta };
   },
   methods: {

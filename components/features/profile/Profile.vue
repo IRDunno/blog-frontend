@@ -21,9 +21,10 @@
       <div class="col-xl-6">
         <p class="text-center">Own Blogs</p>
         <hr />
-        <div v-for="(blog, index) in blogs">
+        <div v-for="(blog, index) in blogs2">
           <Blog :blog="blog" @deleted="deleted" />
         </div>
+        <Pagination :metaLinks="metaLinks" @urlBlog="loadBlog" />
       </div>
     </div>
   </div>
@@ -34,6 +35,7 @@ import EditPassword from "./EditPassword.vue";
 import UserInfo from "./UserInfo.vue";
 import EditInfo from "./EditInfo.vue";
 import Blog from "./Blog.vue";
+import Pagination from "~/components/Pagination.vue";
 
 export default {
   components: {
@@ -41,11 +43,16 @@ export default {
     EditPassword,
     EditInfo,
     Blog,
+    Pagination,
   },
   props: {
     blogs: {
       type: Array,
       required: true
+    },
+    metaLinks: {
+      type: Object,
+      required: true,
     }
   },
   data() {
@@ -53,6 +60,7 @@ export default {
       viewInfoComponent: true,
       editPasswordComponent: false,
       editInfoComponent: false,
+      blogs2: [],
     };
   },
   methods: {
@@ -69,10 +77,16 @@ export default {
       this.editPasswordComponent = false;
       this.editInfoComponent = false;
     },
+    loadBlog(data) {
+      this.blogs2 = data;
+    },
     deleted(id) {
-      this.$emit("deleted", id);
+      this.blogs2 = this.blogs2.filter(blog => blog.id != id);
     }
   },
+  created() {
+    this.blogs2 = this.blogs;
+  }
 };
 </script>
 
