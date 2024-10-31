@@ -6,7 +6,7 @@
     <div v-for="(blog, index) in blogs" :key="blog.id">
       <Blog :blog="blog" @deleted="removeBlog" />
     </div>
-     <Pagination :links="links" @urlBlog="loadBlog" />
+     <Pagination :metaLinks="metaLinks" @urlBlog="loadBlog" />
   </div>
 </template>
 
@@ -22,13 +22,13 @@ export default {
   data() {
     return {
       blogs: [],
-      links: [],
+      metaLinks: {},
     };
   },
   async asyncData({ $axios }) {
     const response = await $axios.$get("/blogs");
-    console.log(response);
-    return { blogs: response.data, links: response.meta.links };
+    console.log(response)
+    return { blogs: response.data, metaLinks: response.meta };
   },
   methods: {
     removeBlog(id) {
