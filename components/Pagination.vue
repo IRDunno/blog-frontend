@@ -18,7 +18,7 @@
 
         <!-- PAGINATION START -->
         <li
-          v-for="(link, index) in meta.links.slice(paginationSlice)"
+          v-for="(link, index) in meta.links.slice(paginationSlice, (paginationSlice + 5))"
           v-if="link.label !== `Next &raquo;`"
           :key="index"
           :class="['page-item', { active: link.active }]"
@@ -73,34 +73,26 @@ export default {
   data() {
     return {
       meta: {},
-      paginationSlice: 0,
+      paginationSlice: 1,
     };
   },
   methods: {
     async loadMore(link) {
-      // console.log(link.url);
       if (link.url !== null) {
         const response = await this.$axios.$get(link.url);
         this.$emit("urlBlog", response.data);
         this.meta = response.meta;
 
-        if (this.meta.current_page >= 3) {
+        if ((this.meta.last_page - this.meta.current_page) > 1 && this.meta.current_page >= 3) {
+          console.log(this.meta.last_page - this.meta.current_page)
           const setSlice = this.meta.current_page - 2;
-          console.log(setSlice);
           this.paginationSlice = setSlice;
-          // console.log(this.meta.current_page);
-          // console.log(this.meta
         }
-
-        console.log(this.meta);
-        // console.log(response.meta.links);
       }
     },
   },
   created() {
     this.meta = this.metaLinks;
-    // this.paginationSlice = this.meta.current_page * this.
-    // console.log(this.meta.links[0]);
   },
 };
 </script>
