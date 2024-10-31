@@ -20,7 +20,7 @@
             />
           </div>
           <div class="col-12 col-md-4 col-lg-12">
-            <button class="btn btn-outline-success btn-sm w-100">
+            <button class="btn btn-outline-success btn-sm w-100" @click="switchDefaultProfiile">
               Switch to default profile
             </button>
           </div>
@@ -87,6 +87,7 @@ export default {
         image: null,
         name: "",
         email: "",
+        default: false,
       },
       previewImage: null,
     };
@@ -122,6 +123,10 @@ export default {
         console.log(error.response.data);
       }
     },
+    switchDefaultProfiile() {
+      this.default = true;
+      this.previewImage = "http://127.0.0.1:8000/storage/profile/default_profile.png";
+    }
   },
   mounted() {
     this.form.name = this.user.name;
