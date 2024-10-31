@@ -5,7 +5,7 @@
         <li
           v-for="(link, index) in meta.links"
           :key="index"
-          :class="['page-item', { active: link.label == meta.current_page }]"
+          :class="['page-item', { active: link.active }]"
         >
           <a
             class="page-link"
