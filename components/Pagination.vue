@@ -3,7 +3,7 @@
     <nav>
       <ul class="pagination">
         <li
-          v-for="(link, index) in metaLinks.links"
+          v-for="(link, index) in meta.links"
           :key="index"
           :class="['page-item', { active: link.label == meta.current_page }]"
         >
@@ -42,16 +42,21 @@ export default {
   },
   methods: {
     async loadMore(link) {
+      // console.log(link.url);
+      if (link.label === 'Next &raquo;') link.url = this.meta.path + '?page=' + (this.meta.current_page + 1)
       if (link.url !== null) {
+        console.log("hi")
         const response = await this.$axios.$get(link.url);
         this.$emit("urlBlog", response.data);
         this.meta = response.meta;
+        // console.log(this.meta)
         console.log(response.meta.links);
       }
     },
   },
   mounted() {
-    console.log(this.metaLinks);
+    this.meta = this.metaLinks;
+    // console.log(this.metaLinks);
   },
 };
 </script>
