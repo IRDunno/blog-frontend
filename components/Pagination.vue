@@ -1,7 +1,7 @@
 <template>
   <div>
-    <nav>
-      <ul class="pagination">
+    <nav class="d-flex justify-content-between align-items-center">
+      <ul class="pagination mb-0">
         <li
           v-for="(link, index) in meta.links"
           :key="index"
@@ -23,6 +23,7 @@
           </a>
         </li>
       </ul>
+      <span>{{ meta.to }} out of {{ meta.total }} entries</span>
     </nav>
   </div>
 </template>
@@ -45,11 +46,10 @@ export default {
       // console.log(link.url);
       if (link.label === 'Next &raquo;') link.url = this.meta.path + '?page=' + (this.meta.current_page + 1)
       if (link.url !== null) {
-        console.log("hi")
         const response = await this.$axios.$get(link.url);
         this.$emit("urlBlog", response.data);
         this.meta = response.meta;
-        // console.log(this.meta)
+        console.log(this.meta)
         console.log(response.meta.links);
       }
     },
