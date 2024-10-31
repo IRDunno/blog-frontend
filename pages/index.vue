@@ -6,29 +6,37 @@
     <div v-for="(blog, index) in blogs" :key="blog.id">
       <Blog :blog="blog" @deleted="removeBlog" />
     </div>
+     <Pagination :links="links" @urlBlog="loadBlog" />
   </div>
 </template>
 
 <script>
 import Blog from '~/components/features/blogs/Blog.vue';
+import Pagination from '~/components/Pagination.vue';
 
 export default {
   components: {
     Blog,
+    Pagination,
   },
   data() {
     return {
       blogs: [],
+      links: [],
     };
   },
   async asyncData({ $axios }) {
     const response = await $axios.$get("/blogs");
-    return { blogs: response.data };
+    console.log(response);
+    return { blogs: response.data, links: response.meta.links };
   },
   methods: {
     removeBlog(id) {
       this.blogs = this.blogs.filter((blog) => blog.id != id);
     },
+    loadBlog(data) {
+      this.blogs = data;
+    }
   },
 };
 </script>
