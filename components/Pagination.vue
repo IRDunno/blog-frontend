@@ -23,7 +23,7 @@
           </a>
         </li>
       </ul>
-      <span>{{ meta.to }} out of {{ meta.total }} entries</span>
+      <span>{{ meta.to - 3 }}-{{ meta.to }} out of {{ meta.total }} entries</span>
     </nav>
   </div>
 </template>
