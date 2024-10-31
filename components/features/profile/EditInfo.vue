@@ -109,6 +109,9 @@ export default {
         if (this.form.image) {
           formData.append("image", this.form.image);
         }
+        if (this.form.default) {
+          formData.append("default", this.form.default);
+        }
 
         const response = await this.$axios.$post(
           `/profile/info/${this.user.id}`,
@@ -124,7 +127,7 @@ export default {
       }
     },
     switchDefaultProfiile() {
-      this.default = true;
+      this.form.default = true;
       this.previewImage = "http://127.0.0.1:8000/storage/profile/default_profile.png";
     }
   },
