@@ -11,11 +11,20 @@
             width="100px"
           />
         </div>
-        <input
-          type="file"
-          @change="imageUpload"
-          class="form-control form-control-sm"
-        />
+        <div class="row gy-2">
+          <div class="col-12 col-md-8 col-lg-12">
+            <input
+              type="file"
+              @change="imageUpload"
+              class="form-control form-control-sm"
+            />
+          </div>
+          <div class="col-12 col-md-4 col-lg-12">
+            <button class="btn btn-outline-success btn-sm w-100">
+              Switch to default profile
+            </button>
+          </div>
+        </div>
         <small
           class="form-text text-danger"
           v-if="errors.image"
