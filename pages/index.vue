@@ -6,7 +6,7 @@
     <div v-for="(blog, index) in blogs" :key="blog.id">
       <Blog :blog="blog" @deleted="removeBlog" />
     </div>
-     <Pagination :metaLinks="metaLinks" @urlBlog="loadBlog" />
+     <Pagination :metaLinks="metaLinks" :pages="3" @urlBlog="loadBlog" />
   </div>
 </template>
 

@@ -18,7 +18,7 @@
 
         <!-- PAGINATION START -->
         <li
-          v-for="(link, index) in meta.links.slice(paginationSlice, (paginationSlice + 5))"
+          v-for="(link, index) in meta.links.slice(paginationSlice, (paginationSlice + pages))"
           v-if="link.label !== `Next &raquo;`"
           :key="index"
           :class="['page-item', { active: link.active }]"
@@ -69,6 +69,10 @@ export default {
       type: Object,
       required: true,
     },
+    pages: {
+      type: Number,
+      required: true,
+    }
   },
   data() {
     return {
@@ -83,12 +87,13 @@ export default {
         this.$emit("urlBlog", response.data);
         this.meta = response.meta;
 
-        if ((this.meta.last_page - this.meta.current_page) > 1 && this.meta.current_page >= 3) {
-          const setSlice = this.meta.current_page - 2;
-          console.log(setSlice)
+        const halfOfPage = this.pages / 2 != 0 ? this.pages / 2 : (this.pages / 2) - 1
+        if ((this.meta.last_page - this.meta.current_page) > 0 && this.meta.current_page > halfOfPage) {
+          const setSlice = this.meta.current_page - halfOfPage;
+          console.log(this.meta.last_page - this.meta.current_page)
           this.paginationSlice = setSlice;
         } else {
-          if (this.paginationSlice === 2) this.paginationSlice++;
+          if (this.paginationSlice < 3 && this.paginationSlice > 1) this.paginationSlice++;
         }
       }
     },
